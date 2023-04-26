@@ -5,7 +5,6 @@ import utils.ApplicationTime;
 import utils.FrameUpdater;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
@@ -85,7 +84,7 @@ public class EarthFlightPanel {
         JLabel endCoorLabel = new JLabel("End Coordinaten:    ");
         JTextField endCoorTextField = new JTextField();
 
-        endCoorTextField.setText("-45.0, 0.0");
+        endCoorTextField.setText("-48.4875236, 8.6459531");
         endCoorTextField.setHorizontalAlignment(JTextField.CENTER);
 
         endCoor.add(endCoorLabel, BorderLayout.LINE_START);
@@ -135,11 +134,11 @@ public class EarthFlightPanel {
         alphaSlider.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         JLabel AlphaLabel = new JLabel("Axonometric α:");
-        JLabel AlphaValue = new JLabel(String.format("%d°", (int)Constants.PROJECTION_ALPHA));
-        JSlider AlphaSlider = new JSlider(0, 360, (int)Constants.PROJECTION_ALPHA);
+        JLabel AlphaValue = new JLabel(String.format("%d°", (int) GuiParameters.PROJECTION_ALPHA));
+        JSlider AlphaSlider = new JSlider(0, 360, (int) GuiParameters.PROJECTION_ALPHA);
         AlphaSlider.addChangeListener(e -> {
-            Constants.PROJECTION_ALPHA = (double)AlphaSlider.getValue();
-            AlphaValue.setText(String.format("%d", (int)Constants.PROJECTION_ALPHA));
+            GuiParameters.PROJECTION_ALPHA = (double)AlphaSlider.getValue();
+            AlphaValue.setText(String.format("%d", (int) GuiParameters.PROJECTION_ALPHA));
         });
 
         alphaSlider.add(AlphaLabel, BorderLayout.LINE_START);
@@ -154,11 +153,11 @@ public class EarthFlightPanel {
         s1Slider.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         JLabel S1Label = new JLabel("Axonometric s1");
-        JLabel S1Value = new JLabel(String.format("%.2f", Constants.PROJECTION_S1));
-        JSlider S1Slider = new JSlider(0, 100, (int)(Constants.PROJECTION_S1 * 100));
+        JLabel S1Value = new JLabel(String.format("%.2f", GuiParameters.PROJECTION_S1));
+        JSlider S1Slider = new JSlider(0, 100, (int)(GuiParameters.PROJECTION_S1 * 100));
         S1Slider.addChangeListener(e -> {
-            Constants.PROJECTION_S1 = (double)S1Slider.getValue() / 100.0;
-            S1Value.setText(String.format("%.2f", Constants.PROJECTION_S1));
+            GuiParameters.PROJECTION_S1 = (double)S1Slider.getValue() / 100.0;
+            S1Value.setText(String.format("%.2f", GuiParameters.PROJECTION_S1));
         });
 
         s1Slider.add(S1Label, BorderLayout.LINE_START);
@@ -171,7 +170,7 @@ public class EarthFlightPanel {
         rotationSlider.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         JLabel RotationLabel = new JLabel("Rotation");
-        JLabel RotationValue = new JLabel(String.format("%d°", (int)Constants.PROJECTION_S1));
+        JLabel RotationValue = new JLabel(String.format("%d°", (int) GuiParameters.PROJECTION_S1));
         JSlider RotationSlider = new JSlider(0, 360, (int)Constants.GLOBE_ROTATION);
         RotationSlider.addChangeListener(e -> {
             Constants.GLOBE_ROTATION = (double)RotationSlider.getValue();

@@ -42,14 +42,14 @@ public class EarthAnimation extends JPanel {
     private void ProjectionOnImagePlane() {
         //  Diese Matrix enthält Werte, die für die Projektion einer 3D-Szene auf eine 2D-Fläche verwendet wird.
         projectionMatrix = new Matrix(new double[][]{
-                {-Constants.PROJECTION_S1 * Math.sin(Math.toRadians(Constants.PROJECTION_ALPHA)), 1.0, 0.0, Constants.WINDOW_WIDTH / 2.},
-                {-Constants.PROJECTION_S1 * Math.cos(Math.toRadians(Constants.PROJECTION_ALPHA)), 0.0, -1.0, Constants.WINDOW_HEIGHT / 2.}
+                {-GuiParameters.PROJECTION_S1 * Math.sin(Math.toRadians(GuiParameters.PROJECTION_ALPHA)), 1.0, 0.0, Constants.WINDOW_WIDTH / 2.},
+                {-GuiParameters.PROJECTION_S1 * Math.cos(Math.toRadians(GuiParameters.PROJECTION_ALPHA)), 0.0, -1.0, Constants.WINDOW_HEIGHT / 2.}
         });
         // Die Variablen phi_p und theta_p werden berechnet und enthalten Winkelwerte, die für die Berechnung der Perspektive der 3D-Szene verwendet wird.
-        phi_p = Math.toDegrees(Math.atan(Constants.PROJECTION_S1 * Math.sin(Math.toRadians(Constants.PROJECTION_ALPHA))));
+        phi_p = Math.toDegrees(Math.atan(GuiParameters.PROJECTION_S1 * Math.sin(Math.toRadians(GuiParameters.PROJECTION_ALPHA))));
 
-        theta_p = Math.toDegrees(Math.atan(-Constants.PROJECTION_S1 * Math.cos(Math.toRadians(Constants.PROJECTION_ALPHA)) *
-                                Math.cos(Math.atan(Constants.PROJECTION_S1 * Math.sin(Math.toRadians(Constants.PROJECTION_ALPHA))))
+        theta_p = Math.toDegrees(Math.atan(-GuiParameters.PROJECTION_S1 * Math.cos(Math.toRadians(GuiParameters.PROJECTION_ALPHA)) *
+                                Math.cos(Math.atan(GuiParameters.PROJECTION_S1 * Math.sin(Math.toRadians(GuiParameters.PROJECTION_ALPHA))))
                 )
         );
     }

@@ -9,10 +9,6 @@ public class Constants {
 
 	public static double TIMESCALE = 1.0;
 
-	// projection settings
-	public static double PROJECTION_ALPHA = 0.0;
-	public static double PROJECTION_S1 = 0.33;
-
 	// globe settings
 	public static double GLOBE_SCALE = 300.0;
 	public static double GLOBE_ROTATION = 0.0;
