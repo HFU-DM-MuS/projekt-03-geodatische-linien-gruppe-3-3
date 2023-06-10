@@ -80,23 +80,23 @@ class EarthAnimation extends JPanel {
                 {-s1ScaleFactor * Math.cos(alpha), 0.0, -1.0, h}
         };
 
-        double[] e1H = {1.0, 0.0, 0.0 };
-        double[] e2H = {0.0, 1.0, 0.0};
-        double[] e3H = {0.0, 0.0, 1.0};
+        double[] e1 = {1.0, 0.0, 0.0 };
+        double[] e2 = {0.0, 1.0, 0.0};
+        double[] e3 = {0.0, 0.0, 1.0};
         double[] originH = {0.0, 0.0, 0.0, 1.0};
 
-        double [] e1Hscale = {e1H[0]*scaleFactor,e1H[1]*scaleFactor,e1H[2]*scaleFactor};
-        double [] e2Hscale = {e2H[0]*scaleFactor,e2H[1]*scaleFactor,e2H[2]*scaleFactor};
-        double [] e3Hscale = {e3H[0]*scaleFactor,e3H[1]*scaleFactor,e3H[2]*scaleFactor};
+        double [] e1WithScale = {e1[0]*scaleFactor,e1[1]*scaleFactor,e1[2]*scaleFactor};
+        double [] e2WithScale = {e2[0]*scaleFactor,e2[1]*scaleFactor,e2[2]*scaleFactor};
+        double [] e3WithScale = {e3[0]*scaleFactor,e3[1]*scaleFactor,e3[2]*scaleFactor};
 
-        double [] e1Hhomoge = {e1Hscale[0],e1Hscale[1],e1Hscale[2],1};
-        double [] e2Hhomoge = {e2Hscale[0],e2Hscale[1],e2Hscale[2],1};
-        double [] e3Hhomoge = {e3Hscale[0],e3Hscale[1],e3Hscale[2],1};
+        double [] e1InHomogen = {e1WithScale[0],e1WithScale[1],e1WithScale[2],1};
+        double [] e2InHomogen = {e2WithScale[0],e2WithScale[1],e2WithScale[2],1};
+        double [] e3InHomogen = {e3WithScale[0],e3WithScale[1],e3WithScale[2],1};
 
 
-        double[] xAxisEndPoint = Maths.multMatVec(projectionMatrix, e1Hhomoge);
-        double[] yAxisEndPoint = Maths.multMatVec(projectionMatrix, e2Hhomoge);
-        double[] zAxisEndPoint = Maths.multMatVec(projectionMatrix, e3Hhomoge);
+        double[] xAxisEndPoint = Maths.multMatVec(projectionMatrix, e1InHomogen);
+        double[] yAxisEndPoint = Maths.multMatVec(projectionMatrix, e2InHomogen);
+        double[] zAxisEndPoint = Maths.multMatVec(projectionMatrix, e3InHomogen);
 
         super.paintComponent(g);
 
@@ -130,9 +130,9 @@ class EarthAnimation extends JPanel {
                         scaleFactor* Math.cos(Math.toRadians(latitude)) * Math.sin(Math.toRadians(longitude)),
                         scaleFactor*Math.sin(Math.toRadians(latitude))};
 
-                double [] homogenV = {cartesienVector[0], cartesienVector[1], cartesienVector[2],1};
+                double [] homogenVector = {cartesienVector[0], cartesienVector[1], cartesienVector[2],1};
 
-                double [] vector = Maths.multMatVec(projectionMatrix,homogenV);
+                double [] vector = Maths.multMatVec(projectionMatrix,homogenVector);
 
                 int dotSize =1;
 
@@ -161,9 +161,9 @@ class EarthAnimation extends JPanel {
                         scaleFactor* Math.cos(Math.toRadians(latitude)) * Math.sin(Math.toRadians(longitude)),
                         scaleFactor*Math.sin(Math.toRadians(latitude))};
 
-                double [] homogenV = {cartesienVector[0], cartesienVector[1], cartesienVector[2],1};
+                double [] homogenVector = {cartesienVector[0], cartesienVector[1], cartesienVector[2],1};
 
-                double [] vector = Maths.multMatVec(projectionMatrix,homogenV);
+                double [] vector = Maths.multMatVec(projectionMatrix,homogenVector);
 
                 int dotSize = 1;
                 if(Math.cos(Math.toRadians(phi_p)) * Math.cos(Math.toRadians(theta_p)) * cartesienVector[0] +
@@ -183,7 +183,7 @@ class EarthAnimation extends JPanel {
         }
 
         double [] startVec = {0.0, Math.cos(Math.toRadians(0)), Math.sin(Math.toRadians(0))};
-        double [] [] rotateMatrixY = {
+        /*double [] [] rotateMatrixY = {
                 {Math.cos(-theta_p), 0.0, Math.sin(-theta_p)},
                 {0.0, 1.0, 0.0},
                 {-Math.sin(-theta_p), 0.0, Math.cos(-theta_p)}
@@ -193,8 +193,11 @@ class EarthAnimation extends JPanel {
                 {Math.sin(phi_p), Math.cos(phi_p), 0.0},
                 {0.0, 0.0, 1.0}
         };
-        //double [] rotatevetor = multMatVec(rotateMatrixY,startVec);
-        //double [] rotatevetor2= multMatVec(rotateMatrixZ,rotatevetor);
+
+        double [] rotatevetor = multMatVec(rotateMatrixY,startVec);
+        double [] rotatevetor2= multMatVec(rotateMatrixZ,rotatevetor);
+        */
+
         double [] scalevec = {startVec[0]*=scaleFactor, startVec[1]*=scaleFactor, startVec[2]*=scaleFactor};
 
         g.setColor(Color.RED);
@@ -282,7 +285,7 @@ class EarthAnimation extends JPanel {
         double[] unitVectorN = Maths.divVecWithNumber(Maths.crossProduct(vectorO_Pos1, vectorO_Pos2),Maths.crossProductMagnitude(vectorO_Pos1,vectorO_Pos2));
         double[] unitVectorU = Maths.divVecWithNumber(Maths.crossProduct(unitVectorN, unitVectorP),Maths.crossProductMagnitude(unitVectorN,unitVectorP));
 
-        double[][] transMatrixD = {
+        double[][] transformMatrixD = {
                 {unitVectorP[0],unitVectorU[0],unitVectorN[0]},
                 {unitVectorP[1],unitVectorU[1],unitVectorN[1]},
                 {unitVectorP[2],unitVectorU[2],unitVectorN[2]}
@@ -296,7 +299,7 @@ class EarthAnimation extends JPanel {
         };
 
 
-        double[] turnedCurveVector = Maths.multMatVec(transMatrixD,geodeticCurve);
+        double[] turnedCurveVector = Maths.multMatVec(transformMatrixD,geodeticCurve);
         double[] homogenTCVector = {turnedCurveVector[0],turnedCurveVector[1],turnedCurveVector[2],1};
         double [] twoDHTCVector = Maths.multMatVec(projectionMatrix,homogenTCVector);
         g2d.setColor(Color.BLUE);
@@ -310,7 +313,7 @@ class EarthAnimation extends JPanel {
                         scaleFactor * Math.sin(i),
                         0
                 };
-                turnedCurveVector = Maths.multMatVec(transMatrixD, geodeticCurve);
+                turnedCurveVector = Maths.multMatVec(transformMatrixD, geodeticCurve);
                 homogenTCVector = new double[]{turnedCurveVector[0], turnedCurveVector[1], turnedCurveVector[2], 1};
                 twoDHTCVector = Maths.multMatVec(projectionMatrix, homogenTCVector);
                 g2d.setColor(Color.YELLOW);
