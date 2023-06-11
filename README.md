@@ -19,6 +19,8 @@ Weiterhin soll sie die Bewegung eines Punktes vom Start- zum Zielort entlang des
 und dabei soll sie die überstrichenen Punkte markiert werden und die zurückgelegte Entfernung ausgegeben werden.
 Bei der Darstellung der Linien des Drahtgittermodells und der Flugbahn sollte auch die Lage der Punkte („vorne“ bzw. „hinten“) berücksichtigt werden.
 
+LINK POWERPOINT --> https://felix.hs-furtwangen.de/url/HomeSite/4092657740/userfolder/0/path%3D~~public~~Mathe%5FPrasentation%5FVerbesserung%2Epptx/0
+
 Marvin Veltz & Lena Kirrmann
 
 Mathe und Simulation - MIB2
